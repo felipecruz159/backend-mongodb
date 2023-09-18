@@ -21,7 +21,7 @@ const validaPrestador = [
     check('cnae_fiscal')
         .isNumeric().withMessage('O código do CNAE deve ser um número'),
     check('nome_fantasia')
-        .optional({nullable: true})
+        .optional({ nullable: true })
 
 ]
 
@@ -83,18 +83,41 @@ router.delete('/:id', async (req, res) => {
  * Insere um novo prestador de serviço
  */
 
-router.post('/', validaPrestador, async(req, res) => {
+router.post('/', validaPrestador, async (req, res) => {
     const errors = validationResult(req)
-    if (!errors.isEmpty()){
+    if (!errors.isEmpty()) {
         return res.status(400).json(({
             errors: errors.array()
         }))
-    } else{
+    } else {
         await db.collection(nomeCollection)
-        .insertOne(req.body)
-        .then(result => res.status(200).send(result))
-        .catch(err => res.status(400).json(err))
+            .insertOne(req.body)
+            .then(result => res.status(200).send(result))
+            .catch(err => res.status(400).json(err))
     }
 })
+
+/** PUT /api/prestadores
+ * Altera um prestador de serviço
+ */
+
+router.put('/', validaPrestador, async (req, res) => {
+    let idDocumento = req.body._id // armazenando o id do documento
+    delete req.body._id // iremos remover o id do body
+
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json(({
+            errors: errors.array()
+        }))
+    } else {
+        await db.collection(nomeCollection)
+            .updateOne({ '_id': { $eq: ObjectId(idDocumento) } },
+                { $set: req.body })
+            .then(result => res.status(200).send(result))
+            .catch(err => res.status(400).json(err))
+    }
+})
+
 
 export default router

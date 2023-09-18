@@ -14,3 +14,40 @@ GET {{baseURL}}/id/64ff2b2af9f1045c6c0ec5f2
 // DELETE - Apaga um registro pelo id
 DELETE {{baseURL}}/64ff2b2af9f1045c6c0ec5f2
 Content-Type: application/json
+
+###
+// POST - Insere um novo registro
+POST {{baseURL}}
+Content-Type: application/json
+
+{
+    "cnpj": "45150718000142",
+    "razao_social": "JOSUÉ ALVES ME",
+    "cnae_fiscal": "451510",
+    "nome_fantasia": "JOSUÉ BOY",
+    "data_inicio_atividade": "2020-08-01",
+    "localizacao": {
+        "type": "Point",
+        "coordinates": [-23.2904, -47.2963]
+    }
+}
+
+
+###
+// POST - Insere um novo registro
+
+PUT {{baseURL}}
+Content-Type: application/json
+
+{
+    "_id": "65085944d0ec580f21d4e7e0",
+    "cnpj": "45150718000142",
+    "razao_social": "JOSUÉ ALVES ME",
+    "cnae_fiscal": "451510",
+    "nome_fantasia": "JOSUÉ BOY",
+    "data_inicio_atividade": "2020-08-01",
+    "localizacao": {
+        "type": "Point",
+        "coordinates": [-23.2904, -47.2963]
+    }
+}

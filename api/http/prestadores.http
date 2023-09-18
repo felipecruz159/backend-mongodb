@@ -10,9 +10,15 @@ Content-Type: application/json
 // GET - Lista um registro pelo id
 GET {{baseURL}}/id/64ff2b2af9f1045c6c0ec5f2
 
+
+###
+// GET - Lista um registro pela razao social
+GET {{baseURL}}/id/64ff2b2af9f1045c6c0ec5f2
+
+
 ###
 // DELETE - Apaga um registro pelo id
-DELETE {{baseURL}}/64ff2b2af9f1045c6c0ec5f2
+DELETE {{baseURL}}/razao/alves
 Content-Type: application/json
 
 ###

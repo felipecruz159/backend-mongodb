@@ -68,6 +68,25 @@ router.get('id/:id', async (req, res) => {
     }
 })
 
+/** GET /api/prestadores/razao/:razao
+ * Lista os prestadores de serviço pela razao social
+ */
+
+router.get('razao/:razao', async (req, res) => {
+    try {
+        db.collection(nomeCollection).find({ 'razao_social': { $regex: req.params.razao, $options: "i" } })
+            .toArray((err, docs) => {
+                if (err) {
+                    res.status(400).json(err) //bad request
+                } else {
+                    res.status(200).json(docs) // retorna o documento
+                }
+            })
+    } catch (err) {
+        res.status(500).json({ "error": err.message })
+    }
+})
+
 /** DELETE /api/prestadores/:id
  * Apaga o prestadorde serviço pelo id
  */
